@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'echo \"Reminder: this is a static site served by python http.server. No server-side code will execute. Only static HTML/CSS/JS/assets.\"'"
+          }
+        ]
+      }
+    ]
+  }
+}

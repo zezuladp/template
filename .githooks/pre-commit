@@ -1,0 +1,18 @@
+#!/bin/sh
+# Atomic static site validation — runs before each commit
+
+errors=0
+
+# index.html must exist at repo root
+if [ ! -f index.html ]; then
+    echo "error: index.html is missing from repo root (required by Atomic)" >&2
+    errors=1
+fi
+
+# Warn about .env files being committed
+if git diff --cached --name-only | grep -qE '\.env$'; then
+    echo "error: .env file staged for commit — secrets should not be deployed" >&2
+    errors=1
+fi
+
+exit $errors
